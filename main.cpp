@@ -133,45 +133,47 @@ int main(int argc, char** argv)
         return 1;
 
 #ifdef __linux__
-    // X11 stuff to make the window behave like an overlay/dock.
-    // Basically, makes it always on top, sticky, and not show in taskbars.
-    // Not working on KDE Plasma(KWin), ...
-    Display* dpy = glfwGetX11Display();
-    Window w = glfwGetX11Window(window);
-    Window root = DefaultRootWindow(dpy);
+    if (!config_mode) {
+        // X11 stuff to make the window behave like an overlay/dock.
+        // Basically, makes it always on top, sticky, and not show in taskbars.
+        // Not working on KDE Plasma(KWin), ...
+        Display* dpy = glfwGetX11Display();
+        Window w = glfwGetX11Window(window);
+        Window root = DefaultRootWindow(dpy);
 
-    if (dpy && w) {
-        Atom kde_net_wm_window_type_override = XInternAtom(dpy, "_KDE_NET_WM_WINDOW_TYPE_OVERRIDE", False);
-        XChangeProperty(dpy, w, kde_net_wm_window_type_override, XA_ATOM, 32, PropModeReplace, (unsigned char *)&kde_net_wm_window_type_override, 1);
+        if (dpy && w) {
+            Atom kde_net_wm_window_type_override = XInternAtom(dpy, "_KDE_NET_WM_WINDOW_TYPE_OVERRIDE", False);
+            XChangeProperty(dpy, w, kde_net_wm_window_type_override, XA_ATOM, 32, PropModeReplace, (unsigned char *)&kde_net_wm_window_type_override, 1);
 
-        Atom wm_window_type = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
-        Atom type_dock = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DOCK", False);
-        XChangeProperty(dpy, w, wm_window_type, XA_ATOM, 32, PropModeReplace, (unsigned char *)&type_dock, 1);
+            Atom wm_window_type = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
+            Atom type_dock = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DOCK", False);
+            XChangeProperty(dpy, w, wm_window_type, XA_ATOM, 32, PropModeReplace, (unsigned char *)&type_dock, 1);
 
-        Atom wm_state = XInternAtom(dpy, "_NET_WM_STATE", False);
-        Atom states[] = {
-            XInternAtom(dpy, "_NET_WM_STATE_ABOVE", False),
-            XInternAtom(dpy, "_NET_WM_STATE_STICKY", False),
-            XInternAtom(dpy, "_NET_WM_STATE_SKIP_TASKBAR", False),
-            XInternAtom(dpy, "_NET_WM_STATE_SKIP_PAGER", False)
-        };
-        XChangeProperty(dpy, w, wm_state, XA_ATOM, 32, PropModeReplace, (unsigned char *)states, 4);
+            Atom wm_state = XInternAtom(dpy, "_NET_WM_STATE", False);
+            Atom states[] = {
+                XInternAtom(dpy, "_NET_WM_STATE_ABOVE", False),
+                XInternAtom(dpy, "_NET_WM_STATE_STICKY", False),
+                XInternAtom(dpy, "_NET_WM_STATE_SKIP_TASKBAR", False),
+                XInternAtom(dpy, "_NET_WM_STATE_SKIP_PAGER", False)
+            };
+            XChangeProperty(dpy, w, wm_state, XA_ATOM, 32, PropModeReplace, (unsigned char *)states, 4);
 
-        XEvent ev;
-        memset(&ev, 0, sizeof(ev));
-        ev.xclient.type = ClientMessage;
-        ev.xclient.window = w;
-        ev.xclient.message_type = XInternAtom(dpy, "_NET_WM_STATE", False);
-        ev.xclient.format = 32;
-        ev.xclient.data.l[0] = 1; 
-        ev.xclient.data.l[1] = XInternAtom(dpy, "_NET_WM_STATE_ABOVE", False);
-        ev.xclient.data.l[2] = XInternAtom(dpy, "_NET_WM_STATE_STICKY", False);
-        ev.xclient.data.l[3] = 0;
-        ev.xclient.data.l[4] = 0;
+            XEvent ev;
+            memset(&ev, 0, sizeof(ev));
+            ev.xclient.type = ClientMessage;
+            ev.xclient.window = w;
+            ev.xclient.message_type = XInternAtom(dpy, "_NET_WM_STATE", False);
+            ev.xclient.format = 32;
+            ev.xclient.data.l[0] = 1; 
+            ev.xclient.data.l[1] = XInternAtom(dpy, "_NET_WM_STATE_ABOVE", False);
+            ev.xclient.data.l[2] = XInternAtom(dpy, "_NET_WM_STATE_STICKY", False);
+            ev.xclient.data.l[3] = 0;
+            ev.xclient.data.l[4] = 0;
 
-        XSendEvent(dpy, root, False, SubstructureRedirectMask | SubstructureNotifyMask, &ev);
+            XSendEvent(dpy, root, False, SubstructureRedirectMask | SubstructureNotifyMask, &ev);
 
-        XFlush(dpy);
+            XFlush(dpy);
+        }
     }
 #endif
 
@@ -186,11 +188,7 @@ int main(int argc, char** argv)
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
-    if (!config_mode) {
-        io.ConfigFlags |= ImGuiConfigFlags_NoMouse; 
-        io.ConfigFlags |= ImGuiConfigFlags_NoKeyboard; 
-    } else {
-        
+    if (config_mode) {
         io.ConfigFlags &= ~ImGuiConfigFlags_NoMouse;
         io.ConfigFlags &= ~ImGuiConfigFlags_NoKeyboard;
     }
