@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/ollie/Documents/StatsBy0113/ConfigManager.cpp" "CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.o" "gcc" "CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.o.d"
   "/home/ollie/Documents/StatsBy0113/SystemMonitor.cpp" "CMakeFiles/StatsBy0113.dir/SystemMonitor.cpp.o" "gcc" "CMakeFiles/StatsBy0113.dir/SystemMonitor.cpp.o.d"
   "/home/ollie/Documents/StatsBy0113/imgui-1.92.1/backends/imgui_impl_glfw.cpp" "CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_glfw.cpp.o" "gcc" "CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_glfw.cpp.o.d"
   "/home/ollie/Documents/StatsBy0113/imgui-1.92.1/backends/imgui_impl_opengl3.cpp" "CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_opengl3.cpp.o" "gcc" "CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_opengl3.cpp.o.d"

@@ -4,6 +4,7 @@ StatsBy0113: \
   /usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o \
   CMakeFiles/StatsBy0113.dir/main.cpp.o \
   CMakeFiles/StatsBy0113.dir/SystemMonitor.cpp.o \
+  CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.o \
   CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui.cpp.o \
   CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_draw.cpp.o \
   CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_tables.cpp.o \
@@ -64,6 +65,8 @@ StatsBy0113: \
 CMakeFiles/StatsBy0113.dir/main.cpp.o:
 
 CMakeFiles/StatsBy0113.dir/SystemMonitor.cpp.o:
+
+CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.o:
 
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui.cpp.o:
 

@@ -100,10 +100,24 @@ CMakeFiles/StatsBy0113.dir/SystemMonitor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/StatsBy0113.dir/SystemMonitor.cpp.s"
 	/usr/sbin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ollie/Documents/StatsBy0113/SystemMonitor.cpp -o CMakeFiles/StatsBy0113.dir/SystemMonitor.cpp.s
 
+CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.o: CMakeFiles/StatsBy0113.dir/flags.make
+CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.o: /home/ollie/Documents/StatsBy0113/ConfigManager.cpp
+CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.o: CMakeFiles/StatsBy0113.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ollie/Documents/StatsBy0113/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.o"
+	/usr/sbin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.o -MF CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.o.d -o CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.o -c /home/ollie/Documents/StatsBy0113/ConfigManager.cpp
+
+CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.i"
+	/usr/sbin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ollie/Documents/StatsBy0113/ConfigManager.cpp > CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.i
+
+CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.s"
+	/usr/sbin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ollie/Documents/StatsBy0113/ConfigManager.cpp -o CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.s
+
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui.cpp.o: CMakeFiles/StatsBy0113.dir/flags.make
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui.cpp.o: /home/ollie/Documents/StatsBy0113/imgui-1.92.1/imgui.cpp
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui.cpp.o: CMakeFiles/StatsBy0113.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ollie/Documents/StatsBy0113/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ollie/Documents/StatsBy0113/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui.cpp.o"
 	/usr/sbin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui.cpp.o -MF CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui.cpp.o.d -o CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui.cpp.o -c /home/ollie/Documents/StatsBy0113/imgui-1.92.1/imgui.cpp
 
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui.cpp.i: cmake_force
@@ -117,7 +131,7 @@ CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui.cpp.s: cmake_force
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_draw.cpp.o: CMakeFiles/StatsBy0113.dir/flags.make
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_draw.cpp.o: /home/ollie/Documents/StatsBy0113/imgui-1.92.1/imgui_draw.cpp
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_draw.cpp.o: CMakeFiles/StatsBy0113.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ollie/Documents/StatsBy0113/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_draw.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ollie/Documents/StatsBy0113/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_draw.cpp.o"
 	/usr/sbin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_draw.cpp.o -MF CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_draw.cpp.o.d -o CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_draw.cpp.o -c /home/ollie/Documents/StatsBy0113/imgui-1.92.1/imgui_draw.cpp
 
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_draw.cpp.i: cmake_force
@@ -131,7 +145,7 @@ CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_draw.cpp.s: cmake_force
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_tables.cpp.o: CMakeFiles/StatsBy0113.dir/flags.make
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_tables.cpp.o: /home/ollie/Documents/StatsBy0113/imgui-1.92.1/imgui_tables.cpp
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_tables.cpp.o: CMakeFiles/StatsBy0113.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ollie/Documents/StatsBy0113/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_tables.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ollie/Documents/StatsBy0113/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_tables.cpp.o"
 	/usr/sbin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_tables.cpp.o -MF CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_tables.cpp.o.d -o CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_tables.cpp.o -c /home/ollie/Documents/StatsBy0113/imgui-1.92.1/imgui_tables.cpp
 
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_tables.cpp.i: cmake_force
@@ -145,7 +159,7 @@ CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_tables.cpp.s: cmake_force
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_widgets.cpp.o: CMakeFiles/StatsBy0113.dir/flags.make
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_widgets.cpp.o: /home/ollie/Documents/StatsBy0113/imgui-1.92.1/imgui_widgets.cpp
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_widgets.cpp.o: CMakeFiles/StatsBy0113.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ollie/Documents/StatsBy0113/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_widgets.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ollie/Documents/StatsBy0113/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_widgets.cpp.o"
 	/usr/sbin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_widgets.cpp.o -MF CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_widgets.cpp.o.d -o CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_widgets.cpp.o -c /home/ollie/Documents/StatsBy0113/imgui-1.92.1/imgui_widgets.cpp
 
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_widgets.cpp.i: cmake_force
@@ -159,7 +173,7 @@ CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_widgets.cpp.s: cmake_force
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_glfw.cpp.o: CMakeFiles/StatsBy0113.dir/flags.make
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_glfw.cpp.o: /home/ollie/Documents/StatsBy0113/imgui-1.92.1/backends/imgui_impl_glfw.cpp
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_glfw.cpp.o: CMakeFiles/StatsBy0113.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ollie/Documents/StatsBy0113/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_glfw.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ollie/Documents/StatsBy0113/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_glfw.cpp.o"
 	/usr/sbin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_glfw.cpp.o -MF CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_glfw.cpp.o.d -o CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_glfw.cpp.o -c /home/ollie/Documents/StatsBy0113/imgui-1.92.1/backends/imgui_impl_glfw.cpp
 
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_glfw.cpp.i: cmake_force
@@ -173,7 +187,7 @@ CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_glfw.cpp.s: cmake_fo
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_opengl3.cpp.o: CMakeFiles/StatsBy0113.dir/flags.make
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_opengl3.cpp.o: /home/ollie/Documents/StatsBy0113/imgui-1.92.1/backends/imgui_impl_opengl3.cpp
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_opengl3.cpp.o: CMakeFiles/StatsBy0113.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ollie/Documents/StatsBy0113/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_opengl3.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ollie/Documents/StatsBy0113/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_opengl3.cpp.o"
 	/usr/sbin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_opengl3.cpp.o -MF CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_opengl3.cpp.o.d -o CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_opengl3.cpp.o -c /home/ollie/Documents/StatsBy0113/imgui-1.92.1/backends/imgui_impl_opengl3.cpp
 
 CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_opengl3.cpp.i: cmake_force
@@ -188,6 +202,7 @@ CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_opengl3.cpp.s: cmake
 StatsBy0113_OBJECTS = \
 "CMakeFiles/StatsBy0113.dir/main.cpp.o" \
 "CMakeFiles/StatsBy0113.dir/SystemMonitor.cpp.o" \
+"CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.o" \
 "CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui.cpp.o" \
 "CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_draw.cpp.o" \
 "CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_tables.cpp.o" \
@@ -200,6 +215,7 @@ StatsBy0113_EXTERNAL_OBJECTS =
 
 StatsBy0113: CMakeFiles/StatsBy0113.dir/main.cpp.o
 StatsBy0113: CMakeFiles/StatsBy0113.dir/SystemMonitor.cpp.o
+StatsBy0113: CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.o
 StatsBy0113: CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui.cpp.o
 StatsBy0113: CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_draw.cpp.o
 StatsBy0113: CMakeFiles/StatsBy0113.dir/imgui-1.92.1/imgui_tables.cpp.o
@@ -211,7 +227,7 @@ StatsBy0113: CMakeFiles/StatsBy0113.dir/compiler_depend.ts
 StatsBy0113: /usr/lib64/libglfw.so.3.4
 StatsBy0113: /usr/lib64/libGL.so
 StatsBy0113: CMakeFiles/StatsBy0113.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ollie/Documents/StatsBy0113/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable StatsBy0113"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ollie/Documents/StatsBy0113/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable StatsBy0113"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/StatsBy0113.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

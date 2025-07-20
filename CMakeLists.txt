@@ -28,6 +28,7 @@ find_package(glfw3 CONFIG REQUIRED)
 add_executable(StatsBy0113
     main.cpp
     SystemMonitor.cpp
+    ConfigManager.cpp
     ${IMGUI_SOURCES}
     ${IMGUI_BACKENDS}
 )

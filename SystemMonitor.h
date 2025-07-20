@@ -26,35 +26,40 @@ struct NetworkInterfaceStats {
 
 class SystemMonitor {
 public:
+    // This class handles all the system stat gathering. Where the evil black magic happens.
     SystemMonitor();
     void update();
 
-    // CPU
+    
     double getCpuUsage() const { return cpuUsage; }
     int getCpuTemperature() const { return cpuTemperature; }
 
-    // Memory
+    
     long long getTotalMemory() const { return totalMemory; }
     long long getUsedMemory() const { return usedMemory; }
     long long getAvailableMemory() const { return availableMemory; }
 
-    // Network
-    double getDownloadSpeed() const { return downloadSpeed; } // Bytes/sec
-    double getUploadSpeed() const { return uploadSpeed; }     // Bytes/sec
-    double getPingLatency() const { return pingLatency; }     // ms
+    
+    double getDownloadSpeed() const { return downloadSpeed; } 
+    double getUploadSpeed() const { return uploadSpeed; }     
+    double getPingLatency() const { return pingLatency; }     
 
-    // GPU
+    
     double getGpuUsage() const { return gpuUsage; }
     long long getGpuMemoryUsed() const { return gpuMemoryUsed; }
     long long getGpuMemoryTotal() const { return gpuMemoryTotal; }
     int getGpuTemperature() const { return gpuTemperature; }
 
-    // FPS (calculated externally, but stored here for convenience)
+    
     double getFps() const { return fps; }
     void setFps(double newFps) { fps = newFps; }
 
+    
+    double getProcessCpuUsage() const { return processCpuUsage; }
+    long long getProcessMemoryUsage() const { return processMemoryUsage; }
+
 private:
-    // CPU
+    
     CpuStats prevCpuStats;
     double cpuUsage;
     int cpuTemperature;
@@ -62,13 +67,25 @@ private:
     void updateCpuTemperature();
     CpuStats parseCpuStats(const std::string& line);
 
-    // Memory
+    
+    long long prevProcessCpuUserTime;
+    long long prevProcessCpuKernelTime;
+    long long prevProcessCpuTotalTime;
+    double processCpuUsage;
+    long long processMemoryUsage; 
+    void updateProcessCpuStats();
+    void updateProcessMemoryStats();
+    long getSystemUptime();
+    long getProcessStartTime();
+    long getClockTicksPerSecond();
+
+    
     long long totalMemory;
     long long usedMemory;
     long long availableMemory;
     void updateMemoryStats();
 
-    // Network
+    
     std::map<std::string, NetworkInterfaceStats> prevNetworkStats;
     double downloadSpeed;
     double uploadSpeed;
@@ -76,18 +93,20 @@ private:
     void updateNetworkStats();
     void updatePingStats();
 
-    // GPU
+    
     double gpuUsage;
     long long gpuMemoryUsed;
     long long gpuMemoryTotal;
     int gpuTemperature;
     void updateGpuStats();
 
-    // Time tracking for speed calculations
+    
     std::chrono::steady_clock::time_point lastUpdateTime;
+    std::chrono::steady_clock::time_point lastPingUpdateTime;
+    std::chrono::steady_clock::time_point lastGpuUpdateTime;
 
-    // FPS
+    
     double fps;
 };
 
-#endif // SYSTEM_MONITOR_H
+#endif 

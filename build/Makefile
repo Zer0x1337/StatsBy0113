@@ -129,6 +129,30 @@ StatsBy0113/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/StatsBy0113.dir/build.make CMakeFiles/StatsBy0113.dir/build
 .PHONY : StatsBy0113/fast
 
+ConfigManager.o: ConfigManager.cpp.o
+.PHONY : ConfigManager.o
+
+# target to build an object file
+ConfigManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StatsBy0113.dir/build.make CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.o
+.PHONY : ConfigManager.cpp.o
+
+ConfigManager.i: ConfigManager.cpp.i
+.PHONY : ConfigManager.i
+
+# target to preprocess a source file
+ConfigManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StatsBy0113.dir/build.make CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.i
+.PHONY : ConfigManager.cpp.i
+
+ConfigManager.s: ConfigManager.cpp.s
+.PHONY : ConfigManager.s
+
+# target to generate assembly for a file
+ConfigManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StatsBy0113.dir/build.make CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.s
+.PHONY : ConfigManager.cpp.s
+
 SystemMonitor.o: SystemMonitor.cpp.o
 .PHONY : SystemMonitor.o
 
@@ -330,6 +354,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... StatsBy0113"
+	@echo "... ConfigManager.o"
+	@echo "... ConfigManager.i"
+	@echo "... ConfigManager.s"
 	@echo "... SystemMonitor.o"
 	@echo "... SystemMonitor.i"
 	@echo "... SystemMonitor.s"

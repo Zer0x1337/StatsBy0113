@@ -162,4 +162,5 @@ CMakeFiles/StatsBy0113.dir/main.cpp.o: \
  /usr/include/c++/15/tr1/modified_bessel_func.tcc \
  /usr/include/c++/15/tr1/poly_hermite.tcc \
  /usr/include/c++/15/tr1/poly_laguerre.tcc \
- /usr/include/c++/15/tr1/riemann_zeta.tcc
+ /usr/include/c++/15/tr1/riemann_zeta.tcc \
+ /home/ollie/Documents/StatsBy0113/ConfigManager.h

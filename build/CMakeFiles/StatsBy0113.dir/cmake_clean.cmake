@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/StatsBy0113.dir/link.d"
+  "CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.o"
+  "CMakeFiles/StatsBy0113.dir/ConfigManager.cpp.o.d"
   "CMakeFiles/StatsBy0113.dir/SystemMonitor.cpp.o"
   "CMakeFiles/StatsBy0113.dir/SystemMonitor.cpp.o.d"
   "CMakeFiles/StatsBy0113.dir/imgui-1.92.1/backends/imgui_impl_glfw.cpp.o"
