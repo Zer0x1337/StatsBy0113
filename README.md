@@ -42,7 +42,6 @@ Ensure you have the following installed:
     ```bash
     ./install_dependencies.sh
     ```
-    *Note: This script is designed for Linux-based systems. You may need to manually install dependencies on other operating systems.*
 
 3.  **Build the application:**
     Use the provided build script to compile the project.
