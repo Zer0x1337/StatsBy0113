@@ -14,6 +14,7 @@ The application is highly configurable, allowing users to customize monitoring p
 *   **Graphical User Interface:** Clean and responsive UI powered by Dear ImGui.
 *   **Configurable Settings:** Customize monitoring intervals, display options, and more via a dedicated configuration manager.
 
+![Check it out](https://github.com/Zer0x1337/StatsBy0113/blob/main/StatsBy0113gif1.gif)   
 
 ---
 
