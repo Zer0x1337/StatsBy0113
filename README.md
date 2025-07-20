@@ -55,7 +55,7 @@ Ensure you have the following installed:
 After successfully building the application, navigate to the `build/` directory and run the executable:
 
 ```bash
-sudo ./StatsBy0113
+sudo ./StatsBy0113 (--config, --debug)
 ```
 
 The application window will appear, displaying your system's CPU and RAM usage. You can interact with the GUI to access settings and other features.
