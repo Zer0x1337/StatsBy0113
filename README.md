@@ -69,7 +69,9 @@ The application window will appear, displaying your system's CPU and RAM usage. 
 
 ## Configuration
 
-StatsBy0113 uses a configuration file (e.g., `stats_config.ini` or `config.ini` in the `build/` directory) to manage its settings. You can modify this file to adjust various parameters, or use the in-application configuration options if available.
+StatsBy0113 uses a configuration file (e.g., `config.ini` in the `build/` directory) to manage its settings. You can modify this file to adjust various parameters, or use the in-application configuration options if available.
+**Note:** If you are using KDE Plasma like i am you will need to go into your system settings -> window rules, and force overlay for this application since KWin overrides X11 in this case.
+
 
 ## Contributing
 
