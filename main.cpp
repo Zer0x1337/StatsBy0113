@@ -51,7 +51,7 @@ static void glfw_key_callback(GLFWwindow *window, int key, int scancode,
 }
 
 #include <string>
-#include <vector>
+// #include <vector> Not used currently
 
 bool debug_mode = false;
 bool config_mode = false;
@@ -115,6 +115,8 @@ int main(int argc, char **argv) {
                                         "System Stats Overlay", NULL, NULL);
   if (window == NULL)
     return 1;
+
+  glfwSetKeyCallback(window, glfw_key_callback);
 
 #ifdef __linux__
   if (!config_mode) {
