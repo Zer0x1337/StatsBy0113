@@ -8,6 +8,7 @@
 #include <GLFW/glfw3native.h>
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
+#include <X11/keysym.h>
 #include <string.h>
 #endif
 #include "ConfigManager.h"
@@ -34,6 +35,17 @@ static void glfw_error_callback(int error, const char *description) {
   fprintf(stderr, "Glfw Error %d: %s\n", error, description);
 }
 
+void registerGlobalHotkey() {
+  Display *x11Display = glfwGetX11Display();
+  Window root = DefaultRootWindow(x11Display);
+  int keycode = XKeysymToKeycode(x11Display, XK_F1);
+
+  // Grab F1 without modifiers
+  XGrabKey(x11Display, keycode, AnyModifier, root, True, GrabModeAsync,
+           GrabModeAsync);
+  XSelectInput(x11Display, root, KeyPressMask);
+}
+
 static void glfw_key_callback(GLFWwindow *window, int key, int scancode,
                               int action, int mods) {
   ImGuiIO &io = ImGui::GetIO();
@@ -50,6 +62,24 @@ static void glfw_key_callback(GLFWwindow *window, int key, int scancode,
   }
 }
 
+// static void pollGlobalHotkeys(GLFWwindow *window) {
+//   Display *x11Display = glfwGetX11Display();
+//   while (XPending(x11Display)) { // Check if any X11 events are waiting
+//     XEvent event;
+//     XNextEvent(x11Display, &event);
+//     if (event.type == KeyPress) {
+//       KeySym keysym = XLookupKeysym(&event.xkey, 0);
+//       if (keysym == XK_F1) {
+//         printf("F1 detected (global, even when unfocused)");
+//         // You could simulate a GLFW key callback call here:
+//         // keyCallback(window, GLFW_KEY_F1, 0, GLFW_PRESS, 0);
+//         glfw_key_callback(window, GLFW_KEY_F1, 0, GLFW_PRESS, 0);
+//         return;
+//       }
+//     }
+//   }
+// }
+
 #include <string>
 // #include <vector> Not used currently
 
@@ -57,6 +87,15 @@ bool debug_mode = false;
 bool config_mode = false;
 
 int main(int argc, char **argv) {
+
+  // Display *display = XOpenDisplay(nullptr);
+  // if (!display) {
+  //   printf("Failed to open X display\n");
+  //   return 1;
+  // }
+  //
+  // Window root = DefaultRootWindow(display);
+  // int keycode = XKeysymToKeycode(display, XK_F1);
 
   glfwSetErrorCallback(glfw_error_callback);
   if (!glfwInit())
@@ -188,6 +227,9 @@ int main(int argc, char **argv) {
   ImGui_ImplOpenGL3_Init(glsl_version);
 
   double last_frame_time = glfwGetTime();
+
+  registerGlobalHotkey(); // Registers global hotkeys (F1, etc)
+
   while (!glfwWindowShouldClose(window)) {
 
     double current_time = glfwGetTime();
@@ -225,6 +267,20 @@ int main(int argc, char **argv) {
     }
     text_color.w = window_alpha;
 
+    // pollGlobalHotkeys(window);
+    Display *x11Display = glfwGetX11Display();
+    XEvent event;
+    XNextEvent(x11Display, &event);
+    if (event.type == KeyPress) {
+      KeySym keysym = XLookupKeysym(&event.xkey, 0);
+      if (keysym == XK_F1) {
+        printf("F1 detected (global, even when unfocused)");
+        // You could simulate a GLFW key callback call here:
+        // keyCallback(window, GLFW_KEY_F1, 0, GLFW_PRESS, 0);
+        glfw_key_callback(window, GLFW_KEY_F1, 0, GLFW_PRESS, 0);
+        // return;
+      }
+    }
     glfwPollEvents();
 
     ImGui_ImplOpenGL3_NewFrame();
