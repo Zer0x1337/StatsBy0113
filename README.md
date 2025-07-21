@@ -41,11 +41,17 @@ Ensure you have the following installed:
 2.  **Install Dependencies:**
     The project includes a script to help install necessary dependencies.
     ```bash
+    sudo chmod +x install_dependencies.sh
+    ```
+    ```bash
     ./install_dependencies.sh
     ```
 
-3.  **Build the application:**
+4.  **Build the application:**
     Use the provided build script to compile the project.
+    ```bash
+    sudo chmod +x build.sh
+    ```
     ```bash
     ./build.sh
     ```
