@@ -1,3 +1,0 @@
-/home/ollie/Documents/StatsBy0113/build/CMakeFiles/StatsBy0113.dir
-/home/ollie/Documents/StatsBy0113/build/CMakeFiles/edit_cache.dir
-/home/ollie/Documents/StatsBy0113/build/CMakeFiles/rebuild_cache.dir
