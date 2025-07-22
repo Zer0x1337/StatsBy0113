@@ -13,8 +13,13 @@
 #endif
 #include "ConfigManager.h"
 #include "SystemMonitor.h"
+#include <atomic>
 #include <chrono>
 #include <cmath>
+#include <condition_variable>
+#include <iostream>
+#include <mutex>
+#include <queue>
 #include <thread>
 
 SystemMonitor systemMonitor;
@@ -34,6 +39,17 @@ const float hue_speed = 0.05f;
 static void glfw_error_callback(int error, const char *description) {
   fprintf(stderr, "Glfw Error %d: %s\n", error, description);
 }
+
+struct HotKeyMsg {
+  int key;
+  int action;
+  int mods;
+};
+
+// Global KeyPress thread
+std::queue<HotKeyMsg> q; // here: queue of integers just to count calls
+std::mutex mtx;
+std::atomic<bool> done{false};
 
 void registerGlobalHotkey() {
   Display *x11Display = glfwGetX11Display();
@@ -55,26 +71,69 @@ static void glfw_key_callback(GLFWwindow *window, int key, int scancode,
   }
 
   if (key == GLFW_KEY_F1 && action == GLFW_PRESS) {
-    //printf("F1 key pressed!\n");
+    // printf("F1 key pressed!\n");
     show_stats_window = !show_stats_window;
     fade_start_time = glfwGetTime();
     target_alpha = show_stats_window ? 1.0f : 0.0f;
   }
 }
 
-// static void pollGlobalHotkeys(GLFWwindow *window) {
+static void pollGlobalHotkeys(GLFWwindow *window) {
+  Display *dpy = glfwGetX11Display();
+  Window root = DefaultRootWindow(dpy);
+  int kc = XKeysymToKeycode(dpy, XK_F1);
+
+  // Grab F1 without modifiers
+  unsigned mods[4] = {0, LockMask, Mod2Mask, LockMask | Mod2Mask};
+  for (auto m : mods)
+    XGrabKey(dpy, kc, m, root, True, GrabModeAsync, GrabModeAsync);
+  XSelectInput(dpy, root, KeyPressMask);
+  //   Display *x11Display = glfwGetX11Display();
+  while (!done.load()) {
+    while (XPending(dpy)) { // Check if any X11 events are waiting
+      XEvent event;
+      XNextEvent(dpy, &event);
+      if (event.type == KeyPress && XLookupKeysym(&event.xkey, 0) == XK_F1) {
+        printf("F1 detected (global, even when unfocused)");
+        // You could simulate a GLFW key callback call here:
+        // keyCallback(window, GLFW_KEY_F1, 0, GLFW_PRESS, 0);
+        // glfw_key_callback(window, GLFW_KEY_F1, 0, GLFW_PRESS, 0);
+        {
+          std::lock_guard<std::mutex> lock(mtx);
+          q.push({GLFW_KEY_F1, GLFW_PRESS, 0});
+        }
+        glfwPostEmptyEvent();
+      }
+      std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    }
+  }
+}
+// }
+
+// void keyWorker() {
 //   Display *x11Display = glfwGetX11Display();
-//   while (XPending(x11Display)) { // Check if any X11 events are waiting
-//     XEvent event;
-//     XNextEvent(x11Display, &event);
-//     if (event.type == KeyPress) {
-//       KeySym keysym = XLookupKeysym(&event.xkey, 0);
-//       if (keysym == XK_F1) {
-//         printf("F1 detected (global, even when unfocused)");
-//         // You could simulate a GLFW key callback call here:
-//         // keyCallback(window, GLFW_KEY_F1, 0, GLFW_PRESS, 0);
-//         glfw_key_callback(window, GLFW_KEY_F1, 0, GLFW_PRESS, 0);
-//         return;
+//   while (true) {
+//     while (XPending(x11Display)) { // Check if any X11 events are waiting
+//       XEvent event;
+//       XNextEvent(x11Display, &event);
+//       if (event.type == KeyPress) {
+//         KeySym keysym = XLookupKeysym(&event.xkey, 0);
+//         if (keysym == XK_F1) {
+//           printf("F1 detected (global, even when unfocused)");
+//           // You could simulate a GLFW key callback call here:
+//           // keyCallback(window, GLFW_KEY_F1, 0, GLFW_PRESS, 0);
+//           // glfw_key_callback(window, GLFW_KEY_F1, 0, GLFW_PRESS, 0);
+//           {
+//             std::lock_guard<std::mutex> lock(mtx);
+//             if (!q.empty()) {
+//               q.push(1);
+//             } else {
+//               q.push(q.back() + 1);
+//             }
+//             cv.notify_one();
+//           }
+//           // return;
+//         }
 //       }
 //     }
 //   }
@@ -228,11 +287,21 @@ int main(int argc, char **argv) {
 
   double last_frame_time = glfwGetTime();
 
-  registerGlobalHotkey(); // Registers global hotkeys (F1, etc)
+  // registerGlobalHotkey(); // Registers global hotkeys (F1, etc)
 
+  std::thread t(pollGlobalHotkeys, window);
+  // t.detach();
 
-  //start of main loop
+  // start of main loop
   while (!glfwWindowShouldClose(window)) {
+    // std::unique_lock<std::mutex> lock(mtx);
+    // cv.wait(lock, [] { return !q.empty() || done; });
+    // while (!q.empty()) {
+    //   q.pop();
+    //   lock.unlock(); // leave mutex while running the work
+    //   glfw_key_callback(window, GLFW_KEY_F1, 0, GLFW_PRESS, 0);
+    //   lock.lock();
+    // }
 
     double current_time = glfwGetTime();
     double delta_time = current_time - last_frame_time;
@@ -269,19 +338,28 @@ int main(int argc, char **argv) {
     }
     text_color.w = window_alpha;
 
-    // Poll for X11 events without blocking
-    Display *x11Display = glfwGetX11Display();
-    while (XPending(x11Display)) {
-      XEvent event;
-      XNextEvent(x11Display, &event);
-      if (event.type == KeyPress) {
-        KeySym keysym = XLookupKeysym(&event.xkey, 0);
-        if (keysym == XK_F1) {
-          // F1 detected globally
-          glfw_key_callback(window, GLFW_KEY_F1, 0, GLFW_PRESS, 0);
-        }
+    glfwWaitEventsTimeout(0.016);
+    {
+      std::lock_guard<std::mutex> lk(mtx);
+      while (!q.empty()) {
+        auto m = q.front();
+        q.pop();
+        glfw_key_callback(window, GLFW_KEY_F1, 0, GLFW_PRESS, 0);
       }
     }
+    // Poll for X11 events without blocking
+    // Display *x11Display = glfwGetX11Display();
+    // while (XPending(x11Display)) {
+    //   XEvent event;
+    //   XNextEvent(x11Display, &event);
+    //   if (event.type == KeyPress) {
+    //     KeySym keysym = XLookupKeysym(&event.xkey, 0);
+    //     if (keysym == XK_F1) {
+    //       // F1 detected globally
+    //       glfw_key_callback(window, GLFW_KEY_F1, 0, GLFW_PRESS, 0);
+    //     }
+    //   }
+    // }
 
     // Poll for GLFW events
     glfwPollEvents();
@@ -417,6 +495,9 @@ int main(int argc, char **argv) {
   ImGui_ImplOpenGL3_Shutdown();
   ImGui_ImplGlfw_Shutdown();
   ImGui::DestroyContext();
+
+  done = true;
+  t.join();
 
   glfwDestroyWindow(window);
   glfwTerminate();
