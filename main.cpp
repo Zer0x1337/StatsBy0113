@@ -16,8 +16,6 @@
 #include <atomic>
 #include <chrono>
 #include <cmath>
-#include <condition_variable>
-#include <iostream>
 #include <mutex>
 #include <queue>
 #include <thread>
@@ -110,35 +108,6 @@ static void pollGlobalHotkeys(GLFWwindow *window) {
 }
 // }
 
-// void keyWorker() {
-//   Display *x11Display = glfwGetX11Display();
-//   while (true) {
-//     while (XPending(x11Display)) { // Check if any X11 events are waiting
-//       XEvent event;
-//       XNextEvent(x11Display, &event);
-//       if (event.type == KeyPress) {
-//         KeySym keysym = XLookupKeysym(&event.xkey, 0);
-//         if (keysym == XK_F1) {
-//           printf("F1 detected (global, even when unfocused)");
-//           // You could simulate a GLFW key callback call here:
-//           // keyCallback(window, GLFW_KEY_F1, 0, GLFW_PRESS, 0);
-//           // glfw_key_callback(window, GLFW_KEY_F1, 0, GLFW_PRESS, 0);
-//           {
-//             std::lock_guard<std::mutex> lock(mtx);
-//             if (!q.empty()) {
-//               q.push(1);
-//             } else {
-//               q.push(q.back() + 1);
-//             }
-//             cv.notify_one();
-//           }
-//           // return;
-//         }
-//       }
-//     }
-//   }
-// }
-
 #include <string>
 // #include <vector> Not used currently
 
@@ -146,16 +115,6 @@ bool debug_mode = false;
 bool config_mode = false;
 
 int main(int argc, char **argv) {
-
-  // Display *display = XOpenDisplay(nullptr);
-  // if (!display) {
-  //   printf("Failed to open X display\n");
-  //   return 1;
-  // }
-  //
-  // Window root = DefaultRootWindow(display);
-  // int keycode = XKeysymToKeycode(display, XK_F1);
-
   glfwSetErrorCallback(glfw_error_callback);
   if (!glfwInit())
     return 1;
@@ -287,22 +246,10 @@ int main(int argc, char **argv) {
 
   double last_frame_time = glfwGetTime();
 
-  // registerGlobalHotkey(); // Registers global hotkeys (F1, etc)
-
   std::thread t(pollGlobalHotkeys, window);
-  // t.detach();
 
   // start of main loop
   while (!glfwWindowShouldClose(window)) {
-    // std::unique_lock<std::mutex> lock(mtx);
-    // cv.wait(lock, [] { return !q.empty() || done; });
-    // while (!q.empty()) {
-    //   q.pop();
-    //   lock.unlock(); // leave mutex while running the work
-    //   glfw_key_callback(window, GLFW_KEY_F1, 0, GLFW_PRESS, 0);
-    //   lock.lock();
-    // }
-
     double current_time = glfwGetTime();
     double delta_time = current_time - last_frame_time;
     last_frame_time = current_time;
@@ -338,6 +285,7 @@ int main(int argc, char **argv) {
     }
     text_color.w = window_alpha;
 
+    // look for key event from worker thread
     glfwWaitEventsTimeout(0.016);
     {
       std::lock_guard<std::mutex> lk(mtx);
@@ -347,19 +295,6 @@ int main(int argc, char **argv) {
         glfw_key_callback(window, GLFW_KEY_F1, 0, GLFW_PRESS, 0);
       }
     }
-    // Poll for X11 events without blocking
-    // Display *x11Display = glfwGetX11Display();
-    // while (XPending(x11Display)) {
-    //   XEvent event;
-    //   XNextEvent(x11Display, &event);
-    //   if (event.type == KeyPress) {
-    //     KeySym keysym = XLookupKeysym(&event.xkey, 0);
-    //     if (keysym == XK_F1) {
-    //       // F1 detected globally
-    //       glfw_key_callback(window, GLFW_KEY_F1, 0, GLFW_PRESS, 0);
-    //     }
-    //   }
-    // }
 
     // Poll for GLFW events
     glfwPollEvents();
@@ -496,6 +431,7 @@ int main(int argc, char **argv) {
   ImGui_ImplGlfw_Shutdown();
   ImGui::DestroyContext();
 
+  // gracefully stop key worker thread
   done = true;
   t.join();
 
