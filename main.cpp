@@ -226,7 +226,7 @@ int main(int argc, char **argv) {
 
   glfwSetWindowPos(window, 0, 0);
   glfwMakeContextCurrent(window);
-  glfwSwapInterval(1);
+      glfwSwapInterval(1); // Enable vsync
 
   glfwSetKeyCallback(window, glfw_key_callback);
 
@@ -245,6 +245,7 @@ int main(int argc, char **argv) {
   ImGui_ImplOpenGL3_Init(glsl_version);
 
   double last_frame_time = glfwGetTime();
+  int frame_count = 0;
 
   std::thread t(pollGlobalHotkeys, window);
 
@@ -253,13 +254,17 @@ int main(int argc, char **argv) {
     double current_time = glfwGetTime();
     double delta_time = current_time - last_frame_time;
     last_frame_time = current_time;
-    if (delta_time > 0.0) {
-      systemMonitor.setFps(1.0 / delta_time);
-    }
+
+    frame_count++; // Increment frame count every frame
 
     static double last_stat_update_time = 0.0;
     if (current_time - last_stat_update_time > 1.0) {
       systemMonitor.update();
+      // Calculate FPS based on frames rendered in the last second
+      if (current_time - last_stat_update_time > 0) { // Avoid division by zero
+          systemMonitor.setFps(frame_count / (current_time - last_stat_update_time));
+      }
+      frame_count = 0; // Reset frame count
       last_stat_update_time = current_time;
     }
 
@@ -286,7 +291,7 @@ int main(int argc, char **argv) {
     text_color.w = window_alpha;
 
     // look for key event from worker thread
-    glfwWaitEventsTimeout(0.016);
+    glfwPollEvents();
     {
       std::lock_guard<std::mutex> lk(mtx);
       while (!q.empty()) {
